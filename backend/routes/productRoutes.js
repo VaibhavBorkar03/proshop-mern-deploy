@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  addStock,
   createNewProduct,
   createProduct,
   createReview,
@@ -25,4 +26,6 @@ router
   .delete(protect, admin, deleteProduct); //admin
 
 router.route("/:id/reviews").post(protect, createReview);
+
+router.route("/:id/stock").put(addStock);
 export default router;

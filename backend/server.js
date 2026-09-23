@@ -16,7 +16,7 @@ import configurePassport from "../backend/config/passport.js";
 import configureGithubPassport from "../backend/config/githubPassport.js";
 
 const app = express();
-const _dirname = path.resolve(); //
+// const _dirname = path.resolve(); //
 
 await connectDB();
 app.use(express.json());
@@ -49,11 +49,11 @@ app.get("/api/config/paypal", (req, res) =>
   res.send({ clientId: process.env.PAYPAL_CLIENT_ID }),
 );
 
-app.use(express.static(path.join(_dirname, "/frontend/dist")));
+// app.use(express.static(path.join(_dirname, "/frontend/dist")));
 //for unkonwn route hits shows frontend home screen
-app.get(/.*/, (_, res) => {
-  res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"));
-});
+// app.get(/.*/, (_, res) => {
+//   res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"));
+// });
 
 app.use(notFound);
 app.use(errorHandler);

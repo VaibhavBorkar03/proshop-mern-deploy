@@ -13,7 +13,7 @@ export const createNewProduct = asyncHandler(async (req, res) => {
   const { name, price, brand, category, countInStock, description } = req.body;
   const image = req.file;
 
-  if (!name || !price || !brand || !category || !countInStock) {
+  if (!name || !price || !brand || !category || countInStock === undefined) {
     res.status(400);
     throw new Error("Please provide all required fields");
   }
@@ -190,6 +190,36 @@ export const getTopProducts = asyncHandler(async (req, res) => {
   res.status(200).json(products);
 });
 
+// desc -> add stock to existing product
+// route -> PUT /api/products/:id/stock
+// access -> private/admin
+export const addStock = asyncHandler(async (req, res) => {
+  const { quantity } = req.body;
+
+  if (quantity === undefined || quantity === null || Number(quantity) <= 0) {
+    res.status(400);
+    throw new Error("Please provide a valid quantity");
+  }
+
+  const updatedProduct = await Product.findByIdAndUpdate(
+    req.params.id,
+    {
+      $inc: {
+        countInStock: Number(quantity),
+      },
+    },
+    {
+      new: true,
+    },
+  );
+
+  if (!updatedProduct) {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+
+  res.status(200).json(updatedProduct);
+});
 /*
 ******************** deals with images files ********************
 frontned send multipart-data -> server.js ->routes-> middleware-> contollers -> send response back to ->frontend
