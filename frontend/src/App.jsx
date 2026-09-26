@@ -26,6 +26,8 @@ import AddProductForm from "./screens/admin/AddProductForm";
 import AuthGoogleSuccess from "./components/authGoogleSuccess";
 import AuthGitHubSuccess from "./components/AuthGitHubSuccess";
 import VerifyOtpScreen from "./screens/VerifyOtpScreen";
+import InventoryListScreen from "./screens/inventory/InventoryListScreen";
+import AddStockScreen from "./screens/inventory/AddStockScreen";
 // import GoogleLogin from "./components/GoogleLogin";
 
 // import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -52,8 +54,9 @@ const appRouter = createBrowserRouter([
       // { path: "googleLogin", element: <GoogleLogin /> },
       { path: "register", element: <RegisterScreen /> },
       { path: "auth-google-success", element: <AuthGoogleSuccess /> },
-      { path: "auth-github-success", element: <AuthGitHubSuccess/> },
-      {path:"verify-email", element:<VerifyOtpScreen/>},
+      { path: "auth-github-success", element: <AuthGitHubSuccess /> },
+      { path: "verify-email", element: <VerifyOtpScreen /> },
+
       {
         element: <PrivateRoutes />,
         children: [
@@ -78,6 +81,8 @@ const appRouter = createBrowserRouter([
           },
           { path: "/admin/user/:id/edit", element: <UserEditScreen /> },
           { path: "admin/product/create", element: <AddProductForm /> },
+          { path: "inventory", element: <InventoryListScreen /> },
+          { path: "inventory/add-stock/:id", element: <AddStockScreen /> },
         ],
       },
     ],

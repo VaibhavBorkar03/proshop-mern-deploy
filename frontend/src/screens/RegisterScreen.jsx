@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRegisterMutation } from "../redux/slices/usersApiSlice";
 import Loader from "../components/Loader";
 import { toast } from "react-toastify"; // Import toast
-import { setCredentials } from "../redux/slices/authSlice";
+// import { setCredentials } from "../redux/slices/authSlice";
 
 function RegisterScreen() {
   const navigate = useNavigate();
@@ -40,9 +40,10 @@ function RegisterScreen() {
           email,
           password,
         }).unwrap();
-        dispatch(setCredentials({ ...res }));
+        // dispatch(setCredentials({ ...res }));
         toast.success(res?.message);
-        navigate(redirect || "/");
+        // navigate(redirect || "/");
+        navigate("/login");
       } catch (error) {
         toast.error(error?.data?.message);
       }

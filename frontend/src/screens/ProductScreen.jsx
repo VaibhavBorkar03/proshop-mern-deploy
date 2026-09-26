@@ -28,6 +28,8 @@ function ProductScreen() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
+  console.log("userInfo", userInfo);
+
   const { cartItems } = useSelector((state) => state.cart);
   const { id: productId } = useParams();
   const [qty, setQty] = useState(1);
@@ -39,7 +41,6 @@ function ProductScreen() {
     error,
     refetch,
   } = useGetProductDetailsQuery(productId);
-
 
   const [productReview, { isLoading: loadingReview }] =
     useCreateProductReviewMutation();
@@ -174,7 +175,7 @@ function ProductScreen() {
                       type="button"
                       className="btn btn-dark "
                       style={{ width: "120px" }}
-                      disabled={product.countInStock === 0}
+                      disabled={userInfo?.isAdmin || product.countInStock === 0}
                       onClick={addToCartHandler}
                     >
                       Add to Cart
@@ -184,7 +185,7 @@ function ProductScreen() {
                       variant="dark"
                       className="btn-block"
                       style={{ width: "120px" }}
-                      // disabled={cartItems.length === 0}
+                      disabled={userInfo?.isAdmin}
                       onClick={buyProductHandler}
                     >
                       Buy

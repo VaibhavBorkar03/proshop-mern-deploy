@@ -62,6 +62,15 @@ export const productApislice = apiSlice.injectEndpoints({
         url: `${PRODUCTS_URL}/top`,
       }),
     }),
+    addStock: builder.mutation({
+      query: ({ id, quantity }) => ({
+        url: `/api/products/${id}/stock`,
+        method: "PUT",
+        body: {
+          quantity,
+        },
+      }),
+    }),
     createNewProduct: builder.mutation({
       query: (data) => ({
         url: `${PRODUCTS_URL}/add`,
@@ -81,6 +90,7 @@ export const {
   useCreateProductReviewMutation,
   useGetTopProductsQuery,
   useCreateNewProductMutation,
+  useAddStockMutation,
 } = productApislice;
 
 // keepUnusedDataFor-> keep data for 5 seconds after page leave
